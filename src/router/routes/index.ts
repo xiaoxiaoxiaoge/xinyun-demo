@@ -84,7 +84,7 @@ export const ProductRoute: AppRouteRecordRaw = {
     {
       path: 'info/add',
       name: 'AddProduct',
-      component: () => import('/@/views/base-data/product/info/add.vue'),
+      component: () => import('/@/views/base-data/product/newInfo/add.vue'),
       meta: {
         title: '新增商品',
       },

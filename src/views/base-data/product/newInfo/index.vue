@@ -1,6 +1,7 @@
 <script setup>
   import { ref, watch, onMounted, reactive } from 'vue';
   import TableList from './table-list.vue'
+  
   //   表格
 
 
@@ -16,6 +17,14 @@
         {
           key: '2',
           title: '热带水果',
+        },
+        {
+          key: '3',
+          title: '稀有水果',
+        },
+        {
+          key: '4',
+          title: '热销水果',
         },
       ],
     },

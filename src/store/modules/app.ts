@@ -25,6 +25,7 @@ interface AppState {
   projectConfig: ProjectConfig | null;
   // When the window shrinks, remember some states, and restore these states when the window is restored
   beforeMiniInfo: BeforeMiniState;
+  queryData: any
 }
 let timeId: TimeoutHandle;
 export const useAppStore = defineStore({
@@ -34,6 +35,20 @@ export const useAppStore = defineStore({
     pageLoading: false,
     projectConfig: Persistent.getLocal(PROJ_CFG_KEY),
     beforeMiniInfo: {},
+    queryData:[
+      {
+        key: 1,
+        productCode: '3100009',
+        productWord: '6902083897765',
+        productShortCode: 'WHHYYKX',
+        productName: '娃哈哈营养快线',
+        productType: '1',
+        productCategory: '1',
+        out: 1,
+        specification: '双',
+        unit: '盒'
+      }
+    ]
   }),
   getters: {
     getPageLoading(state): boolean {
@@ -86,7 +101,9 @@ export const useAppStore = defineStore({
       this.projectConfig!.menuSetting = deepMerge(this.projectConfig!.menuSetting, setting);
       Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
     },
-
+    setQueryData(data: any): void {
+      this.queryData.push(data);
+    },
     async resetAllState() {
       resetRouter();
       Persistent.clearAll();

@@ -7,7 +7,7 @@
       <Layout :class="`${prefixCls}-main`">
         <LayoutMultipleHeader />
         <LayoutContent />
-        <LayoutFooter />
+        <!-- <LayoutFooter /> -->
       </Layout>
     </Layout>
   </Layout>

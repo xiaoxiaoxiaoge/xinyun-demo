@@ -1,6 +1,11 @@
 <script  setup>
 import { getCurrentInstance, onMounted, reactive, ref, toRefs } from "vue";
 import { RightOutlined, DownOutlined } from "@ant-design/icons-vue";
+import { useAppStore } from '/@/store/modules/app';
+  const appStore = useAppStore();
+  onMounted(()=>{
+    console.log(appStore.queryData)
+  })
 const data = reactive({
   form: {
     username: ''
@@ -13,86 +18,63 @@ const data = reactive({
 const columns = [
 {
     title: '商品条码',
-    dataIndex: 'age',
-    key: 'age',
+    dataIndex: 'productCode',
+    key: 'productCode',
     sorter: true,
   },
   {
     title: '商品代码',
-    dataIndex: 'age',
-    key: 'age',
+    dataIndex: 'productWord',
+    key: 'productWord',
     sorter: true,
   },
   {
     title: '速记码',
-    dataIndex: 'address',
-    key: 'address',
+    dataIndex: 'productShortCode',
+    key: 'productShortCode',
     sorter: true,
   },
   {
     title: '商品名称',
-    key: 'tags',
-    dataIndex: 'tags',
+    key: 'productName',
+    dataIndex: 'productName',
     sorter: true,
   },
   {
     title: '商品类型',
-    dataIndex: 'code',
-    key: 'code',
-    sorter: true,
+    dataIndex: 'productType',
+    key: 'productType',
+  },
+  {
+    title: '商品类别',
+    dataIndex: 'productCategory',
+    key: 'productCategory',
   },
   {
     title: '是否淘汰',
-    dataIndex: 'age',
-    key: 'age',
+    dataIndex: 'out',
+    key: 'out',
     sorter: true,
   },
   {
     title: '规格',
-    dataIndex: 'address',
-    key: 'address',
+    dataIndex: 'specification',
+    key: 'specification',
     sorter: true,
   },
   {
     title: '基本单位',
-    key: 'tags',
-    dataIndex: 'tags',
+    key: 'unit',
+    dataIndex: 'unit',
     sorter: true,
+    fixed: 'right',
   },
-  {
-    title: 'Action',
-    key: 'action',
-    sorter: true,
-  },
+  // {
+  //   title: '操作',
+  //   key: 'action',
+  // },
 ];
 
-const queryData = params => {
-  return [
-    {
-      key: '1',
-      shopCode: 15,
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-      
-    },
-    {
-      key: '2',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: '3',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },
-  ]
-  // return axios.get('https://randomuser.me/api?noinfo', {
-  //   params,
-  // });
-};
 const state = reactive({
   selectedRowKeys: [],
   // Check here to configure the default column
@@ -117,58 +99,12 @@ const pagination = {
   onChange: handlePageChange // 页码改变时的回调函数
 }
 
-// const {
-//   data: dataSource,
-//   run,
-//   loading,
-//   current,
-//   pageSize,
-// } = usePagination(queryData, {
-//   formatResult: res => res.data.results,
-//   pagination: {
-//     currentKey: 'page',
-//     pageSizeKey: 'results',
-//   },
-// });
-
-// const pagination = computed(() => ({
-//   total: 200,
-//   current: current.value,
-//   pageSize: pageSize.value,
-// }));
-
-
-
-const handleData = [
-  {
-    key: '1',
-    shopCode: 15,
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-    children:[
-        {
-          key: '3',
-          age: 42,
-          address: 'London No. 1 Lake Park',
-          tags: ['loser'],
-        },
-      ]
-  },
-  {
-    key: '2',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
 const { queryParams, form } = toRefs(data);
+
+
+const handleQuery = () => {
+  console.log(form)
+}
 
 </script>
 
@@ -196,7 +132,10 @@ const { queryParams, form } = toRefs(data);
             label="商品品牌"
             name="商品品牌"
           >
-            <a-input v-model:value="form.username" />
+              <product-brand-selector
+                v-model:value="form.brandId"
+                :request-params="{ available: true }"
+              />
           </a-form-item>
         </a-col>
         <a-col class="gutter-row" :span="8">
@@ -204,7 +143,11 @@ const { queryParams, form } = toRefs(data);
             label="商品部门"
             name="商品部门"
           >
-            <a-input v-model:value="form.username" />
+              <product-depatment
+                v-model:value="form.categoryId"
+                :only-final="false"
+                @update:value="selectCategory"
+              />
           </a-form-item>
         </a-col>
         <a-col class="gutter-row" :span="8">
@@ -212,7 +155,10 @@ const { queryParams, form } = toRefs(data);
             label="商品标签"
             name="商品标签"
           >
-            <a-input v-model:value="form.username" />
+          <product-property-selector
+                v-model:value="form.brandId"
+                :request-params="{ available: true }"
+              />
           </a-form-item>
         </a-col>
         <a-col class="gutter-row" :span="8">
@@ -220,7 +166,10 @@ const { queryParams, form } = toRefs(data);
             label="经营范围"
             name="经营范围"
           >
-            <a-input v-model:value="form.username" />
+            <product-scope
+                v-model:value="form.brandId"
+                :request-params="{ available: true }"
+              />
           </a-form-item>
         </a-col>
         <a-col class="gutter-row" :span="8">
@@ -234,7 +183,7 @@ const { queryParams, form } = toRefs(data);
     </a-form>
     <a-row :gutter="10" class="mb8">
         <a-col :span="1.5">
-          <a-button type="primary" plain  @click="()=>handleSetting()" v-hasPermi="['server:list:add']">新增</a-button>
+          <a-button type="primary" plain  v-hasPermi="['server:list:add']" @click="$router.push('/product/info/add')">新增</a-button>
         </a-col>
         <a-col :span="1.5">
           <a-button type="primary" plain  @click="handleImport" v-hasPermi="['server:list:add']">批量删除</a-button>
@@ -314,10 +263,10 @@ const { queryParams, form } = toRefs(data);
             </template>
           </a-dropdown-button>
         </a-col>
-        <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
+        <right-toolbar v-model:showSearch="showSearch"></right-toolbar>
       </a-row>
 
-      <a-table :columns="columns" :data-source="handleData" :pagination="pagination" :row-selection="{ selectedRowKeys: state.selectedRowKeys, onChange: onSelectChange }" >
+      <a-table :columns="columns" :data-source="appStore.queryData" :pagination="pagination" :scroll="{ x: 600 }" :row-selection="{ selectedRowKeys: state.selectedRowKeys, onChange: onSelectChange }" >
         <!-- <template #headerCell="{ column }">
           
         </template> -->
@@ -350,22 +299,17 @@ const { queryParams, form } = toRefs(data);
         </template>
 
         <template #bodyCell="{ column, record }">
-          <!-- <template v-if="column.key === 'tags'">
+          <template v-if="column.key === 'productWord'">
             <span>
-              <a-tag
-                v-for="tag in record.tags"
-                :key="tag"
-                :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'"
-              >
-                {{ tag.toUpperCase() }}
-              </a-tag>
-            </span>
-          </template> -->
-          <template v-if="column.key === 'action'">
-            <span>
-              <a-button type="primary" >删除</a-button>
+              <a href="#">{{ record.productWord }}</a>
             </span>
           </template>
+          <template v-if="column.key === 'out'">
+            <span>
+              <span class=" text-lime-600">否</span>
+            </span>
+          </template>
+          
         </template>
       </a-table>
   </div>

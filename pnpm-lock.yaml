@@ -228,6 +228,9 @@ importers:
       '@vben/vite-config':
         specifier: workspace:*
         version: link:internal/vite-config
+      '@vitejs/plugin-vue-jsx':
+        specifier: ^3.0.1
+        version: 3.1.0(vite@4.5.3(@types/node@20.5.1)(less@4.2.0)(sass@1.78.0)(terser@5.31.6))(vue@3.5.3(typescript@5.5.4))
       '@vue/compiler-sfc':
         specifier: ^3.3.4
         version: 3.5.3
@@ -8268,6 +8271,16 @@ snapshots:
       '@babel/plugin-transform-typescript': 7.25.2(@babel/core@7.25.2)
       '@vue/babel-plugin-jsx': 1.2.2(@babel/core@7.25.2)
       vite: 4.5.3(@types/node@20.16.5)(less@4.2.0)(sass@1.78.0)(terser@5.31.6)
+      vue: 3.5.3(typescript@5.5.4)
+    transitivePeerDependencies:
+      - supports-color
+
+  '@vitejs/plugin-vue-jsx@3.1.0(vite@4.5.3(@types/node@20.5.1)(less@4.2.0)(sass@1.78.0)(terser@5.31.6))(vue@3.5.3(typescript@5.5.4))':
+    dependencies:
+      '@babel/core': 7.25.2
+      '@babel/plugin-transform-typescript': 7.25.2(@babel/core@7.25.2)
+      '@vue/babel-plugin-jsx': 1.2.2(@babel/core@7.25.2)
+      vite: 4.5.3(@types/node@20.5.1)(less@4.2.0)(sass@1.78.0)(terser@5.31.6)
       vue: 3.5.3(typescript@5.5.4)
     transitivePeerDependencies:
       - supports-color
