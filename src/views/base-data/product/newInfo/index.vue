@@ -16,15 +16,51 @@
       children: [
         {
           key: '2',
-          title: '热带水果',
+          title: '0213|热带水果',
         },
         {
           key: '3',
-          title: '稀有水果',
+          title: '03|零食111',
         },
         {
           key: '4',
-          title: '热销水果',
+          title: '05054586|酒类配方',
+        },
+        {
+          key: '5',
+          title: '07446046|酿酒原料',
+        },
+        {
+          key: '6',
+          title: '10086|批发测试',
+        },
+        {
+          key: '7',
+          title: '1021920|酒水测试1',
+        },
+        {
+          key: '8',
+          title: '1022|批发商品',
+        },
+        {
+          key: '9',
+          title: '2001|WMS标品仓',
+          children: [
+            {
+              key: '9-1',
+              title: '2002|WMS标品0001',
+            },
+          ]
+        },
+        {
+          key: '10',
+          title: '2002|非WMS标品仓',
+          children: [
+            {
+              key: '10-1',
+              title: '2002|非WMS标品0001',
+            },
+          ]
         },
       ],
     },
@@ -82,7 +118,7 @@
 <template>
   <page-wrapper content-full-height fixed-height>
     <div class="w-full h-full bg-white">
-      <div class="w-[200px] float-left h-full p-2" style="border-right: 1px solid #efefef">
+      <div class="w-[250px] float-left h-full p-2" style="border-right: 1px solid #efefef">
         <a-select
           ref="select"
           v-model:value="value1"
@@ -125,7 +161,7 @@
           </a-tree>
         </div>
       </div>
-      <div class="w-[calc(100%-200px)] float-right p-4">
+      <div class="w-[calc(100%-250px)] float-right p-4">
         <TableList />
       </div>
     </div>

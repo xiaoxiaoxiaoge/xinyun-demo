@@ -282,7 +282,7 @@
           
         >
           <a-row :gutter="16">
-            <a-col class="gutter-row" :span="6">
+            <a-col class="gutter-row" :span="8">
               <a-form-item
                 label="基本单位分组"
                 name="unitGroup"

@@ -5,10 +5,66 @@
     form: {},
   });
   const { form } = toRefs(data);
-  
+  const tableHeight = `calc(100vh - 500px)`;
 
   const queryData = ref(
     [
+      {
+          id: 1,
+          code: 1,
+          productWord: '0000002',
+          productName: '匡威官方男鞋',
+          productCode: '210000002',
+          specify: '双',
+          unit: '盒',
+          num: '1.00',
+          price: '13.3333',
+          money: '13.3333',
+          storeNum: '6.00',
+          baseUnit: '盒'
+      },
+      {
+          id: 1,
+          code: 1,
+          productWord: '0000002',
+          productName: '匡威官方男鞋',
+          productCode: '210000002',
+          specify: '双',
+          unit: '盒',
+          num: '1.00',
+          price: '13.3333',
+          money: '13.3333',
+          storeNum: '6.00',
+          baseUnit: '盒'
+      },
+      {
+          id: 1,
+          code: 1,
+          productWord: '0000002',
+          productName: '匡威官方男鞋',
+          productCode: '210000002',
+          specify: '双',
+          unit: '盒',
+          num: '1.00',
+          price: '13.3333',
+          money: '13.3333',
+          storeNum: '6.00',
+          baseUnit: '盒'
+      },
+      {
+          id: 1,
+          code: 1,
+          productWord: '0000002',
+          productName: '匡威官方男鞋',
+          productCode: '210000002',
+          specify: '双',
+          unit: '盒',
+          num: '1.00',
+          price: '13.3333',
+          money: '13.3333',
+          storeNum: '6.00',
+          baseUnit: '盒'
+      },
       {
           id: 1,
           code: 1,
@@ -94,7 +150,7 @@
     key: 'baseUnit',
     dataIndex: 'baseUnit',
     sorter: true,
-    fixed: 'right',
+    // fixed: 'right',
   }
 ];
 const editingRecord = ref(null)
@@ -179,7 +235,7 @@ const deleteRow = (row) => {
               name="time"
               :rules="[{ required: true, message: '请选择调整时间!' }]"
             >
-              <a-date-picker v-model:value="form.time" placeholder="请选择调整时间" />
+              <a-date-picker v-model:value="form.time" placeholder="请选择调整时间" style="width: 100%;"/>
             </a-form-item>
           </a-col>
           <a-col class="gutter-row" :span="6">
@@ -254,8 +310,8 @@ const deleteRow = (row) => {
         </a-col>
       </a-row>
 
-        <a-table :columns="columns" :data-source="queryData"  :pagination="false" class="custom-table">
-            <template #summary>
+        <a-table :columns="columns" :data-source="queryData"   :pagination="false" class="custom-table">
+            <template #summary fixed>
               <a-table-summary-row>
                 <a-table-summary-cell :col-span="7" class="text-center font-bold">总合计：{{ queryData.length }}项</a-table-summary-cell>
                 <a-table-summary-cell :col-span="2"  class=" font-bold">
@@ -293,6 +349,9 @@ const deleteRow = (row) => {
                 <template v-else-if="column.key === 'money'">
                   <span>{{ (record.num * record.price).toFixed(4) }}</span>
                 </template>
+                <template v-else>
+                  <span class="custom-cell">{{ record[column.key] }}</span>
+                </template>
             </template>
         </a-table>
     </div>
@@ -308,19 +367,11 @@ const deleteRow = (row) => {
 <style lang="less" scoped>
 .simple-app-container{
   padding: 16px 0;
-  :deep(.ant-table-wrapper table){
-    height: calc(100vh - 450px);
-    border-collapse: collapse;
-  border-spacing: 0;
-  }
-  .custom-table {
-    :deep(.ant-table-tbody) {
-      min-height: calc(100vh - 500px); /* 设置最小高度，根据需要调整 */
-    }
-    :deep(.ant-table-tbody td) {
-      height: 50px; /* 设置最小高度，根据需要调整 */
-    }
-  }
+  // :deep(.ant-table-wrapper table){
+  //   height: calc(100vh - 450px);
+  //   border-collapse: collapse;
+  //   border-spacing: 0;
+  // }
 }
 
 </style>
